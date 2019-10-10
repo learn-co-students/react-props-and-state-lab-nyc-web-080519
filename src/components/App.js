@@ -16,20 +16,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchPets()
-    // this.state.filters.type === "all" ? this.fetchPets() : this.fetchFilteredPets(this.state.filters.type)
+    this.fetchFilteredPets("all")
   }
 
-  //fetch methods
-  fetchPets = () => {
-    fetch("/api/pets")
-    .then(resp => resp.json())
-    .then(pets => {
-      this.setState({
-        pets: pets
-      })
-    })
-  }
 
   fetchFilteredPets = (type) => {
     let apiParam 
