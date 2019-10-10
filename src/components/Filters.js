@@ -1,13 +1,6 @@
 import React from 'react'
 
 class Filters extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  //   // this.state = {
-  //   //   searchTerm: "all"
-  //   // }
-  // }
-
   searchingHandler = (searchTerm)=>{
     this.props.onChange(searchTerm)
   }
@@ -31,7 +24,7 @@ class Filters extends React.Component {
         </div>
 
         <div className="field">
-          <button className="ui secondary button">Find pets</button>
+          <button className="ui secondary button" onClick={this.props.onFindPetsClick} >Find pets</button>
         </div>
       </div>
     )

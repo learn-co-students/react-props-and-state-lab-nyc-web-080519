@@ -16,11 +16,34 @@ class App extends React.Component {
   }
 
 
+  onFindPetsClick =()=> {
+    // fetch list of pets
+    if (this.state.filters.type !== "all") {
+      fetch(`/api/pets?type=${this.state.filters.type}`)
+      .then(resp => resp.json())
+      .then(data => this.setState({
+        pets: data    }))
+    } else {
+      fetch(`/api/pets`)
+        .then(resp => resp.json())
+        .then(data => this.setState({
+          pets: data    }))
+    }
+  }
+
+  adoptPet=(petOBJ)=>{
+    let petsArrCopy = [...this.state.pets]
+    let newPet = petsArrCopy.find(pet => pet.id === petOBJ.props.pet.id)
+    newPet.isAdopted = true
+    this.setState({
+      pets: petsArrCopy
+    })
+  }
+
   onChangeType = (searchTerm)=> {
     let copyObj = {...this.state.filters}
     copyObj.type = searchTerm
     this.setState({
-      // make sure searchTerm is a string
       filters: copyObj
     })
   }
@@ -34,10 +57,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters key={this.state} onChangeType={this.onChangeType}/>
+              <Filters key={"filters"} onChangeType={this.onChangeType} onFindPetsClick={this.onFindPetsClick} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser key={"browsers"} pets={this.state.pets} adoptPet={this.adoptPet} />
             </div>
           </div>
         </div>
