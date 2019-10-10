@@ -3,7 +3,6 @@ import React from 'react'
 class Pet extends React.Component {
 
   clickHandler=(e)=> {
-    // console.log("THIS: ", this)
     this.props.adoptPet(this)
   }
 
@@ -13,7 +12,6 @@ class Pet extends React.Component {
       <div className="card">
         <div className="content">
           <a className="header">
-            {/*'♀' OR '♂' */}
             {this.props.pet.gender === "male" ? '♀   ' : '♂   ' }
             {this.props.pet.name}
           </a>
