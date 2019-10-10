@@ -3,7 +3,7 @@ import React from 'react'
 class Pet extends React.Component {
   handleClick = () => {
     // console.log(this.props.pet)
-    this.props.adoptPet(this.props.pet)
+    this.props.onAdoptPet(this.props.pet.id)
   }
 
   render() {
