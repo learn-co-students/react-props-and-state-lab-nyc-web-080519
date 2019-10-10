@@ -102,3 +102,19 @@ adoption status.
 - [State Updates May Be Asynchronous](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous)
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/react-props-and-state-lab'>Props And State Lab</a> on Learn.co and start learning to code for free.</p>
+
+
+
+
+ ------
+ TASKS:
+
+ 1: onChangeType() 
+ --> passed from App to Filters
+ --> should update App's state.filters.type
+
+ 2: onFindPetsClick()
+--> App should fetch a list of pets
+--> /api/pets?type={petType} is our fetch route
+--> set App's state.pets equal to the result of the fetch
+
