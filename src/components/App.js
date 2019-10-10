@@ -2,6 +2,7 @@ import React from 'react'
 
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
+import { timingSafeEqual } from 'crypto'
 
 class App extends React.Component {
   constructor() {
@@ -15,6 +16,35 @@ class App extends React.Component {
     }
   }
 
+  handleFilterChange = (e) => {
+    let newType = e.target.value
+    let newFilters = {...this.state.filters, type: newType}
+    this.setState({
+      filters: newFilters
+    })
+  }
+
+  handlePetsClick = () => {
+    let url = "/api/pets"
+    if (this.state.filters.type !== "all") {
+      url += "?type=" + this.state.filters.type
+    }
+    fetch(url)
+    .then(resp => resp.json())
+    .then(pets => this.setState({
+      pets: pets
+    }))
+  }
+
+  handleAdoptPet = (id) => {
+    let petsCopy = [...this.state.pets]
+    let foundPet = petsCopy.find(pet => pet.id === id)
+    foundPet.isAdopted = !foundPet.isAdopted
+    this.setState({
+      pets: petsCopy
+    })
+  }
+
   render() {
     return (
       <div className="ui container">
@@ -24,10 +54,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType={this.handleFilterChange} onFindPetsClick={this.handlePetsClick} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets={this.state.pets} onAdoptPet={this.handleAdoptPet} />
             </div>
           </div>
         </div>
