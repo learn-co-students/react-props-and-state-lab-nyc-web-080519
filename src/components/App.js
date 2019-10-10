@@ -10,9 +10,19 @@ class App extends React.Component {
     this.state = {
       pets: [],
       filters: {
-        type: 'all'
+        type: "all"
       }
-    }
+    } 
+  }
+
+
+  onChangeType = (searchTerm)=> {
+    let copyObj = {...this.state.filters}
+    copyObj.type = searchTerm
+    this.setState({
+      // make sure searchTerm is a string
+      filters: copyObj
+    })
   }
 
   render() {
@@ -24,7 +34,7 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters key={this.state} onChangeType={this.onChangeType}/>
             </div>
             <div className="twelve wide column">
               <PetBrowser />
