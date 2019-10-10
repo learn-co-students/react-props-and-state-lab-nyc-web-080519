@@ -2,8 +2,9 @@ import React from 'react'
 
 class Pet extends React.Component {
 
-  clickHandler=(e)=> {
-    this.props.adoptPet(this)
+  clickHandler=()=> {
+    let id = this.props.pet.id
+    this.props.onAdoptPet(id)
   }
 
 
@@ -12,7 +13,7 @@ class Pet extends React.Component {
       <div className="card">
         <div className="content">
           <a className="header">
-            {this.props.pet.gender === "male" ? '♀   ' : '♂   ' }
+            {this.props.pet.gender === "male" ? '♂' : '♀' }
             {this.props.pet.name}
           </a>
           <div className="meta">

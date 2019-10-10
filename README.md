@@ -110,11 +110,11 @@ adoption status.
  TASKS:
 
  1: onChangeType() 
- [X]--> passed from App to Filters
- [X]--> should update App's state.filters.type
+[X]--> passed from App to Filters
+[X]--> should update App's state.filters.type
 
  2: onFindPetsClick()
---> App should fetch a list of pets
---> /api/pets?type={petType} is our fetch route
---> set App's state.pets equal to the result of the fetch
+[X]--> App should fetch a list of pets
+[X]--> /api/pets?type={petType} is our fetch route
+[X]--> set App's state.pets equal to the result of the fetch
 
