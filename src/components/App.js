@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Filters from './Filters'
 import PetBrowser from './PetBrowser'
 
@@ -15,7 +14,37 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount = () => {
+    this.fetchAll()
+  }
+
+  fetchAll = () => {
+    fetch("/api/pets")
+    .then(response => response.json())
+    .then(data => this.setState({
+      pets: data
+    })
+    )
+  }
+
+  onChangeType = (event) => {
+    this.setState({
+      filters: {
+        type: event.target.value
+      }
+    })
+  }
+
+  onClick = (petId) => {
+    const pets = this.state.pets.map(pet => {
+      return pet.id === petId ? { ...pet, isAdopted: true } : pet;
+    });
+    this.setState({ pets });
+  }
+
   render() {
+    // console.log(this.state.pets)
+    console.log(this.state.filters.type)
     return (
       <div className="ui container">
         <header>
@@ -24,10 +53,10 @@ class App extends React.Component {
         <div className="ui container">
           <div className="ui grid">
             <div className="four wide column">
-              <Filters />
+              <Filters onChangeType = {this.onChangeType} />
             </div>
             <div className="twelve wide column">
-              <PetBrowser />
+              <PetBrowser pets ={this.state.pets} filterType ={this.state.filters.type} onClick = {this.onClick} />
             </div>
           </div>
         </div>
