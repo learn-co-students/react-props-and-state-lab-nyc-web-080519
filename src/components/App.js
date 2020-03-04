@@ -31,7 +31,7 @@ class App extends React.Component {
     }
   }
 
-  fetchPets = petType => {
+  fetchPets = petType => {  
     let queryString = petType ? `?type=${petType}` : ''
 
     fetch(`/api/pets${queryString}`)
